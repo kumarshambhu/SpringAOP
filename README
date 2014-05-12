@@ -1,2 +1,26 @@
-
 This only Spring AOP. There is no use of aspectj.
+Advice i.e the methods of class
+	 1) LoggerAfterAdvice.afterReturning
+	 2) LoggerAroundAdvice.invoke
+	 3) LoggerBeforeAdvice.before
+	 4) LoggingAllAdvice.before
+	 5) LoggingAllAdvice.afterReturning
+
+Aspect i.e the class having advices
+     1) LoggerAfterAdvice
+	 2) LoggerAroundAdvice
+	 3) LoggerBeforeAdvice
+	 4) LoggingAllAdvice
+
+
+Target i.e the class where advices are applied
+	 1) EmployeeService
+	 2) ProjectService
+	 
+Jointpoint i.e methods of target class
+     1) EmployeeService.getEmployee
+     2) EmployeeService.setEmployee
+	 3) ProjectService.getProject 	      
+	 4) ProjectService.setProject
+	 
+	 
