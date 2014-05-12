@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="loggingAllAdvice" class="com.shambhu.advice.LoggingAllAdvice" />
+
+	<bean id="loggerBeforeAdvice" class="com.shambhu.advice.LoggerBeforeAdvice" />
+	<bean id="loggerAfterAdvice" class="com.shambhu.advice.LoggerAfterAdvice" />
+
+	<bean id="loggerAroundAdvice" class="com.shambhu.advice.LoggerAroundAdvice" />
+
+	<bean id="employeeService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="employeeServiceProxy" />
+		<property name="interceptorNames">
+			<list>
+				<!-- Either -->
+				<value>loggingAllAdvice</value>
+				<!-- or <value>loggerBeforeAdvice</value> <value>loggerAfterAdvice</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="employeeServiceProxy" class="com.shambhu.service.EmployeeService">
+		<property name="employee" ref="employee" />
+	</bean>
+	<bean name="employee" class="com.shambhu.model.Employee">
+		<property name="employeeId" value="210" />
+		<property name="firstName" value="Shambhu" />
+		<property name="lastName" value="Kumar" />
+		<property name="phone" value="9893333083" />
+	</bean>
+
+
+
+
+	<bean name="project" class="com.shambhu.model.Project" />
+	
+	<bean id="projectService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="projectServiceProxy" />
+		<property name="interceptorNames">
+			<list>
+				<value>loggerAroundAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="projectServiceProxy" class="com.shambhu.service.ProjectService">
+		<property name="project" ref="project" />
+	</bean>
+</beans>
